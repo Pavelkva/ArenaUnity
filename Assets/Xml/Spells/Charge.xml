@@ -1,0 +1,37 @@
+<Ability>
+    <Id>66</Id>
+    <Name>MoveToTarget</Name>
+    <SelfCast>true</SelfCast>
+    <AbilityCost>
+        <TargetAtt>ACTUALAP</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>2</Value>
+    </AbilityCost>
+    <RangeToUse>99</RangeToUse>
+    <ChangePosition>
+        <Id>52</Id>
+        <AbleToMiss>false</AbleToMiss>
+        <School>PHYSICAL</School>
+        <SelfCast>true</SelfCast>
+
+        <HowFar>3</HowFar>
+        <ReverseDirection>false</ReverseDirection>
+        <TrigerTraps>true</TrigerTraps>
+    </ChangePosition>
+    <Damage>
+        <Id>0</Id>
+        <AbleToMiss>true</AbleToMiss>
+        <School>PHYSICAL</School>
+        <RangeToUse>1</RangeToUse>
+
+        <MinEffect>2</MinEffect>
+        <MaxEffect>3</MaxEffect>
+        <Multiplier>0</Multiplier>
+        <MultiplierAtt>STRENGTH</MultiplierAtt>
+        <BonusMultiplier>1</BonusMultiplier>
+        <BonusAtt>STRENGTH</BonusAtt>
+        <CalcFromTarget>false</CalcFromTarget>
+        <AbleToCrit>true</AbleToCrit>
+        <TargetAtt>ACTUALHP</TargetAtt>
+    </Damage>
+</Ability>

@@ -1,0 +1,34 @@
+<Ability>
+    <Id>5</Id>
+    <Name>Energy Regeneration</Name>
+    <ConditionEffect>
+        <Id>5</Id>
+        <AbleToMiss>false</AbleToMiss>
+        <School>TRUE</School>
+
+        <Name>Energy Regeneration</Name>
+        <Duration>999</Duration>
+        <Stackable>1</Stackable>
+
+        <Event>TURNSTART</Event>
+        <EffectsToUse>
+            <Heal>
+                <Id>5</Id>
+                <AbleToMiss>false</AbleToMiss>
+                <School>TRUE</School>
+
+                <MinEffect>1</MinEffect>
+                <MaxEffect>1</MaxEffect>
+                <Multiplier>0</Multiplier>
+                <MultiplierAtt>AGILITY</MultiplierAtt>
+                <BonusMultiplier>0</BonusMultiplier>
+                <BonusAtt>AGILITY</BonusAtt>
+                <CalcFromTarget>false</CalcFromTarget>
+                <AbleToCrit>false</AbleToCrit>
+                <TargetAtt>ACTUALAP</TargetAtt>
+            </Heal>
+        </EffectsToUse>
+        <CastMode>0</CastMode>
+        <RemoAfterTrigger>0</RemoAfterTrigger>
+    </ConditionEffect>
+</Ability>

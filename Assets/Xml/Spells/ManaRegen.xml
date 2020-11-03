@@ -1,0 +1,34 @@
+<Ability>
+    <Id>5</Id>
+    <Name>Mana Regeneration</Name>
+    <ConditionEffect>
+        <Id>6</Id>
+        <AbleToMiss>false</AbleToMiss>
+        <School>TRUE</School>
+
+        <Name>Mana Regeneration</Name>
+        <Duration>999</Duration>
+        <Stackable>1</Stackable>
+
+        <Event>TURNSTART</Event>
+        <EffectsToUse>
+            <Heal>
+                <Id>6</Id>
+                <AbleToMiss>false</AbleToMiss>
+                <School>TRUE</School>
+
+                <MinEffect>5</MinEffect>
+                <MaxEffect>5</MaxEffect>
+                <Multiplier>0</Multiplier>
+                <MultiplierAtt>INTELLECT</MultiplierAtt>
+                <BonusMultiplier>0</BonusMultiplier>
+                <BonusAtt>INTELLECT</BonusAtt>
+                <CalcFromTarget>false</CalcFromTarget>
+                <AbleToCrit>false</AbleToCrit>
+                <TargetAtt>ACTUALMANA</TargetAtt>
+            </Heal>
+        </EffectsToUse>
+        <CastMode>0</CastMode>
+        <RemoAfterTrigger>0</RemoAfterTrigger>
+    </ConditionEffect>
+</Ability>

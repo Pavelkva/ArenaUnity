@@ -1,0 +1,26 @@
+<Ability>
+    <Id>0</Id>
+    <Name>Attack</Name>
+    <RangeToUse>1</RangeToUse>
+    <AbilityCost>
+        <TargetAtt>ACTUALAP</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>1</Value>
+    </AbilityCost>
+    <Damage>
+        <Id>0</Id>
+        <AbleToMiss>true</AbleToMiss>
+        <School>PHYSICAL</School>
+        <RangeToUse>1</RangeToUse>
+
+        <MinEffect>0</MinEffect>
+        <MaxEffect>0</MaxEffect>
+        <Multiplier>0</Multiplier>
+        <MultiplierAtt>DAMAGE</MultiplierAtt>
+        <BonusMultiplier>1</BonusMultiplier>
+        <BonusAtt>DAMAGE</BonusAtt>
+        <CalcFromTarget>false</CalcFromTarget>
+        <AbleToCrit>true</AbleToCrit>
+        <TargetAtt>ACTUALHP</TargetAtt>
+    </Damage>
+</Ability>

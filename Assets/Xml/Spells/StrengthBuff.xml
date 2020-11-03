@@ -1,0 +1,26 @@
+<Ability>
+    <Id>1</Id>
+    <Name>Powerup</Name>
+    <AbilityCost>
+        <TargetAtt>ACTUALAP</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>2</Value>
+    </AbilityCost>
+    <Buff>
+        <Id>1</Id>
+        <SelfCast>true</SelfCast>
+        <AbleToMiss>false</AbleToMiss>
+        <School>PHYSICAL</School>
+      
+        <Name>Strength</Name>
+        <Duration>5</Duration>
+        <Stackable>1</Stackable>
+      
+        <ModAtt>INTELLECT</ModAtt>
+        <Multiplier>0</Multiplier>
+        <Percentage>true</Percentage>
+        <CalcFromTarget>false</CalcFromTarget>
+        <AttTarget>BONUSSTRENGTH</AttTarget>
+        <Bonus>3</Bonus>
+    </Buff>
+</Ability>

@@ -1,0 +1,26 @@
+<Ability>
+    <Id>4</Id>
+    <Name>Attack</Name>
+    <AbilityCost>
+        <TargetAtt>ACTUALMANA</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>20</Value>
+    </AbilityCost>
+    <RangeToUse>99</RangeToUse>
+    <Heal>
+        <Id>4</Id>
+        <SelfCast>true</SelfCast>
+        <AbleToMiss>false</AbleToMiss>
+        <School>PHYSICAL</School>
+        
+        <MinEffect>0</MinEffect>
+        <MaxEffect>0</MaxEffect>
+        <Multiplier>0</Multiplier>
+        <MultiplierAtt>SPELLPOWER</MultiplierAtt>
+        <BonusMultiplier>1</BonusMultiplier>
+        <BonusAtt>SPELLPOWER</BonusAtt>
+        <CalcFromTarget>false</CalcFromTarget>
+        <AbleToCrit>true</AbleToCrit>
+        <TargetAtt>ACTUALHP</TargetAtt>
+    </Heal>
+</Ability>

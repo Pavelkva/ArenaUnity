@@ -1,0 +1,58 @@
+<Ability>
+    <Id>10</Id>
+    <Name>Fireball</Name>
+    <RangeToUse>5</RangeToUse>
+    <AbleToMiss>true</AbleToMiss>
+    <AbilityCost>
+        <TargetAtt>ACTUALMANA</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>10</Value>
+    </AbilityCost>
+    <Damage>
+        <Id>11</Id>
+        <AbleToMiss>false</AbleToMiss>
+        <School>MAGICAL</School>
+        <RangeToUse>5</RangeToUse>
+
+        <MinEffect>10</MinEffect>
+        <MaxEffect>20</MaxEffect>
+        <Multiplier>0</Multiplier>
+        <MultiplierAtt>SPELLPOWER</MultiplierAtt>
+        <BonusMultiplier>0.5</BonusMultiplier>
+        <BonusAtt>SPELLPOWER</BonusAtt>
+        <CalcFromTarget>false</CalcFromTarget>
+        <AbleToCrit>true</AbleToCrit>
+        <TargetAtt>ACTUALHP</TargetAtt>
+    </Damage>
+    <ConditionEffect>
+        <Id>12</Id>
+        <AbleToMiss>false</AbleToMiss>
+        <School>MAGICAL</School>
+        <RangeToUse>5</RangeToUse>
+
+        <Name>I am on fire!</Name>
+        <Duration>5</Duration>
+        <Stackable>5</Stackable>
+
+        <Event>TURNSTART</Event>
+        <EffectsToUse>
+            <Damage>
+                <Id>3</Id>
+                <AbleToMiss>false</AbleToMiss>
+                <School>MAGICAL</School>
+
+                <MinEffect>2</MinEffect>
+                <MaxEffect>2</MaxEffect>
+                <Multiplier>0</Multiplier>
+                <MultiplierAtt>SPELLPOWER</MultiplierAtt>
+                <BonusMultiplier>0</BonusMultiplier>
+                <BonusAtt>SPELLPOWER</BonusAtt>
+                <CalcFromTarget>false</CalcFromTarget>
+                <AbleToCrit>false</AbleToCrit>
+                <TargetAtt>ACTUALHP</TargetAtt>
+            </Damage>
+        </EffectsToUse>
+        <CastMode>0</CastMode>>
+        <RemoAfterTrigger>0</RemoAfterTrigger>
+    </ConditionEffect>
+</Ability>

@@ -1,0 +1,41 @@
+<Ability>
+    <Id>2</Id>
+    <Name>Curse</Name>
+    <RangeToUse>5</RangeToUse>
+    <AbilityCost>
+        <TargetAtt>ACTUALMANA</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>20</Value>
+    </AbilityCost>
+    <ConditionEffect>
+        <Id>7</Id>
+        <AbleToMiss>false</AbleToMiss>
+        <School>MAGICAL</School>
+        <RangeToUse>5</RangeToUse>
+
+        <Name>Doesnt feels good</Name>
+        <Duration>5</Duration>
+        <Stackable>5</Stackable>
+
+        <Event>TURNSTART</Event>
+        <EffectsToUse>
+            <Damage>
+                <Id>3</Id>
+                <AbleToMiss>false</AbleToMiss>
+                <School>MAGICAL</School>
+
+                <MinEffect>2</MinEffect>
+                <MaxEffect>2</MaxEffect>
+                <Multiplier>0</Multiplier>
+                <MultiplierAtt>SPELLPOWER</MultiplierAtt>
+                <BonusMultiplier>0</BonusMultiplier>
+                <BonusAtt>SPELLPOWER</BonusAtt>
+                <CalcFromTarget>false</CalcFromTarget>
+                <AbleToCrit>false</AbleToCrit>
+                <TargetAtt>ACTUALHP</TargetAtt>
+            </Damage>
+        </EffectsToUse>
+        <CastMode>0</CastMode>>
+        <RemoAfterTrigger>0</RemoAfterTrigger>
+    </ConditionEffect>
+</Ability>

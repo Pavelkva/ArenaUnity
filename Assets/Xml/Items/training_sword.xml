@@ -1,0 +1,14 @@
+<Equipment>
+    <Id>1</Id>
+    <Name>Training Sword</Name>
+
+    <Part>MainHand</Part>
+    <AttributeBonus>
+      <Attribute>BONUSMINDAMAGE</Attribute>
+      <Value>1</Value>
+    </AttributeBonus>
+    <AttributeBonus>
+      <Attribute>BONUSMAXDAMAGE</Attribute>
+      <Value>1</Value>
+    </AttributeBonus>
+</Equipment>

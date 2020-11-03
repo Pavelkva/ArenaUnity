@@ -1,0 +1,21 @@
+<Ability>
+    <Id>50</Id>
+    <Name>MoveToTarget</Name>
+    <AbilityCost>
+        <TargetAtt>ACTUALAP</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>2</Value>
+    </AbilityCost>
+    <RangeToUse>99</RangeToUse>
+    <ChangePosition>
+        <Id>51</Id>
+        <SelfCast>true</SelfCast>
+        <AbleToMiss>false</AbleToMiss>
+        <School>PHYSICAL</School>
+
+        <HowFar>1</HowFar>
+        <ReverseDirection>true</ReverseDirection>
+        <TrigerTraps>true</TrigerTraps>
+
+    </ChangePosition>
+</Ability>
