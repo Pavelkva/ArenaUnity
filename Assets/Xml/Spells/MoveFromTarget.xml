@@ -1,6 +1,6 @@
 <Ability>
     <Id>50</Id>
-    <Name>MoveToTarget</Name>
+    <Name>MoveFromTarget</Name>
     <AbilityCost>
         <TargetAtt>ACTUALAP</TargetAtt>
         <Percentage>false</Percentage>

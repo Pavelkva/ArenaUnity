@@ -25,8 +25,6 @@ namespace Abilities
                 abilityEffect.Value = HowFar * (-1);
                 howFarCanMove *= (-1);
             }
-            int movingToPosition = (int)(target.Position + abilityEffect.RealValue);
-            Debug.Log(Id + " how far can move: " + HowFarCanMove(target) + " realvalue: " + abilityEffect.RealValue);
             
             if (ReverseDirection && howFarCanMove > abilityEffect.RealValue || !ReverseDirection && howFarCanMove < abilityEffect.RealValue)
             {
@@ -34,7 +32,6 @@ namespace Abilities
                 abilityEffect.Modificator = 1;
                 abilityEffect.Value = howFarCanMove;
             }
-            Debug.Log(" realvalue: " + abilityEffect.RealValue);
             target.ChangePosition(abilityEffect);
         }
 
@@ -89,12 +86,10 @@ namespace Abilities
             {
                 if (RunTrough || target.EnemyPosition > target.Position)
                 {
-                    Debug.Log(Id + " leftLimt " + leftLimt + " - " + target.Position);
                     howFarCanMove = (leftLimt - target.Position) * -(1);
                 }
                 else
                 {
-                    Debug.Log(Id + " EnemyPosition " + target.EnemyPosition + " - " + target.Position) ;
                     howFarCanMove = (target.EnemyPosition - target.Position + 1) * -(1);
                 }
             }
@@ -102,12 +97,10 @@ namespace Abilities
             {
                 if (RunTrough || target.EnemyPosition < target.Position)
                 {
-                    Debug.Log(Id + " rightLimit " + rightLimit + " - " + target.Position);
                     howFarCanMove = (rightLimit - target.Position);
                 }
                 else
                 {
-                    Debug.Log(Id + " EnemyPosition " + target.EnemyPosition + " - " + target.Position);
                     howFarCanMove = (target.EnemyPosition - target.Position - 1);
                 }
             }

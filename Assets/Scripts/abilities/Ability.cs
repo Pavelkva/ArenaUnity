@@ -54,7 +54,6 @@ namespace Abilities
             }
             if (allEffectsUnableToUse)
             {
-                UnityEngine.Debug.Log("ALL EFFECTS UNUSABLE ID: " + Id);
                 return false;
             }
 
@@ -63,7 +62,6 @@ namespace Abilities
             {   
                 if (caster.GetMissingResource(abilityCost.GetAbilityEffectEvent(caster)) != 0)
                 {
-                    UnityEngine.Debug.Log("MISSING RESOURCES ID: " + Id + "resource: " + caster.GetMissingResource(abilityCost.GetAbilityEffectEvent(caster)));
                     return false;
                 }
             }
@@ -71,18 +69,10 @@ namespace Abilities
             {
                 if (target.Position - caster.Position > 0)
                 {
-                    if (!(target.Position - caster.Position <= RangeToUse))
-                    {
-                        UnityEngine.Debug.Log("WRONG RANGE: " + Id + " RangeToUse: " + RangeToUse + " Range: " + (target.Position - caster.Position));
-                    }
                     return target.Position - caster.Position <= RangeToUse;
                 }
                 else
                 {
-                    if (!(caster.Position - target.Position <= RangeToUse))
-                    {
-                        UnityEngine.Debug.Log("WRONG RANGE: " + Id + " RangeToUse: " + RangeToUse + " Range: " + (caster.Position - target.Position));
-                    }
                     return caster.Position - target.Position <= RangeToUse;
                 }
             }

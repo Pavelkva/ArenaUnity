@@ -8,6 +8,7 @@ using Items;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Xml.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,46 +43,25 @@ public class Arena : MonoBehaviour
         enemyFighter.Name = "Enemy";
         SetBaseAttributes(playerFighter, enemyFighter);
 
-        XmlSerializer serializer = new XmlSerializer(typeof(Ability));
-        StreamReader reader = new StreamReader("Assets/Xml/Spells/BaseAttack.xml");
-        Ability baseAttack = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/StrengthBuff.xml");
-        Ability strengthBuff = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/Dot.xml");
-        Ability curse = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/Heal.xml");
-        Ability heal = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/ApRegen.xml");
-        Ability apRegen = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/ManaRegen.xml");
-        Ability manaRegen = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/MoveToTarget.xml");
-        Ability moveToEnemy = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/MoveFromTarget.xml");
-        Ability moveFromEnemy = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/Fireball.xml");
-        Ability fireball = (Ability)serializer.Deserialize(reader.BaseStream);
-        reader = new StreamReader("Assets/Xml/Spells/Charge.xml");
-        Ability charge = (Ability)serializer.Deserialize(reader.BaseStream);
-        abilities.Add(moveFromEnemy);
-        abilities.Add(fireball);
-        playerFighter.SpellBook.Add(baseAttack);
-        playerFighter.SpellBook.Add(strengthBuff);
-        playerFighter.SpellBook.Add(curse);
-        playerFighter.SpellBook.Add(heal);
-        playerFighter.SpellBook.Add(moveFromEnemy);
-        playerFighter.SpellBook.Add(moveToEnemy);
-        playerFighter.SpellBook.Add(fireball);
-        playerFighter.SpellBook.Add(charge);
+        List<int> ignore = new List<int> {5, 6};
+        List<Ability> abilities = Deserializer.GetAllAbilities("Assets/Xml/Spells/");
+        foreach (Ability abi in abilities)
+        {
+            if (!ignore.Contains(abi.Id))
+            {
+                playerFighter.SpellBook.Add(abi);
+            }
+            
+        }
 
         //enemyFighter.SpellBook.Add(fireball);
-        enemyFighter.SpellBook.Add(moveFromEnemy);
-        enemyFighter.SpellBook.Add(baseAttack);
+        enemyFighter.SpellBook.Add(abilities.First(abi => abi.Name == "MoveFromTarget"));
+        enemyFighter.SpellBook.Add(abilities.First(abi => abi.Name == "Attack"));
 
-        playerFighter.UseAbility(manaRegen, playerFighter, false);
-        enemyFighter.UseAbility(manaRegen, enemyFighter, false);
-        playerFighter.UseAbility(apRegen, playerFighter, false);
-        enemyFighter.UseAbility(apRegen, enemyFighter, false);
+        playerFighter.UseAbility(abilities.First(abi => abi.Name == "Mana Regeneration"), playerFighter, false);
+        enemyFighter.UseAbility(abilities.First(abi => abi.Name == "Mana Regeneration"), enemyFighter, false);
+        playerFighter.UseAbility(abilities.First(abi => abi.Name == "Energy Regeneration"), playerFighter, false);
+        enemyFighter.UseAbility(abilities.First(abi => abi.Name == "Energy Regeneration"), enemyFighter, false);
 
         enemyFighter.CharacterAttributes.GetAttribute(AttributeBonus.Bonus.BONUSSTRENGTH).Value = 15;
 
@@ -119,7 +99,6 @@ public class Arena : MonoBehaviour
 
     public void EndTurn()
     {
-        Debug.Log("here");
         playerFighter.CheckOverTimeEffects();
         playerFighter.EventOccured(null, EventsEnum.TURNEND);
 
