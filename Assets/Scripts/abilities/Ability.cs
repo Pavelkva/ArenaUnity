@@ -90,14 +90,16 @@ namespace Abilities
             }
             else
             {
-                
+                       
                 foreach (AbilityEffect abe in AbilityEffects)
                 {
+                    
                     Fighter targetForEffect = target;
                     if (abe.SelfCast)
                     {
                         targetForEffect = caster;
                     }
+
 
                     if (abe is ChangePosition)
                     {
@@ -105,7 +107,10 @@ namespace Abilities
                     }
                     if (abe.IsAbleToUse(caster, targetForEffect))
                     {
+                        caster.EventOccured(abe.GetAbilityEffectEvent(caster, target), EventsEnum.ABILITYBEFOREUSE);
                         abe.Use(caster, targetForEffect);
+                        caster.EventOccured(abe.GetAbilityEffectEvent(caster, target), EventsEnum.ABILITYAFTERUSE);
+                        abe.ClearAbilityEffectEvent();
                     }
                 }
             }

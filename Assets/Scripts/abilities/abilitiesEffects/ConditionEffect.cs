@@ -17,28 +17,61 @@ namespace Abilities
         [XmlArrayItem("Heal", Type = typeof(Heal))]
         public List<AbilityEffect> EffectsToUse { get; set; }
         public EventsEnum Event { get; set; }
-        public AbilityEffectEvent EffectEventCheck { get; set; }
+
+        [XmlArray(ElementName = "GreaterCheck", IsNullable = true)]
+        public List<AbilityEffectEvent> GreaterCheck;
+        [XmlArray(ElementName = "LowerCheck", IsNullable = true)]
+        public List<AbilityEffectEvent> LowerCheck;
         public AbilityEffectEvent EffectEventChange { get; set; }
 
         public void EventOccured(AbilityEffectEvent abilityEffectEvent)
         {
             bool proceed = true;
 
-            if (EffectEventCheck != null)
+            if (GreaterCheck != null)
             {
-                if (EffectEventCheck.Hit != null && EffectEventCheck.Hit != abilityEffectEvent.Hit)
+                foreach (AbilityEffectEvent abee in GreaterCheck)
                 {
-                    proceed = false;
-                }
-                if (EffectEventCheck.AbilityEffect != null && EffectEventCheck.AbilityEffect.Id != abilityEffectEvent.AbilityEffect.Id)
-                {
-                    proceed = false;
-                }
-                if (EffectEventCheck.AbilityEffect != null && EffectEventCheck.AbilityEffect.School != abilityEffectEvent.AbilityEffect.School)
-                {
-                    proceed = false;
+                    if (!StaticCheck(abee, abilityEffectEvent))
+                    {
+                        proceed = false;
+                    }
+                    if (abee.Hit != null && abee.Hit < abilityEffectEvent.Hit)
+                    {
+                        proceed = false;
+                    }
+                    if (abee.AbilityEffect != null)
+                    {
+                        if (abee.AbilityEffect.Id < abilityEffectEvent.AbilityEffect.Id)
+                        {
+                            proceed = false;
+                        }
+                    }
                 }
             }
+            
+            if (LowerCheck != null)
+            {
+                foreach (AbilityEffectEvent abee in LowerCheck)
+                {
+                    if (!StaticCheck(abee, abilityEffectEvent))
+                    {
+                        proceed = false;
+                    }
+                    if (abee.Hit != null && abee.Hit > abilityEffectEvent.Hit)
+                    {
+                        proceed = false;
+                    }
+                    if (abee.AbilityEffect != null)
+                    {
+                        if (abee.AbilityEffect.Id > abilityEffectEvent.AbilityEffect.Id)
+                        {
+                            proceed = false;
+                        }
+                    } 
+                }
+            }
+            
 
             if (proceed)
             {
@@ -125,10 +158,39 @@ namespace Abilities
             fighter.SpellEffects.Remove(this);
         }
 
+        public override AbilityEffectEvent GetAbilityEffectEvent(Fighter caster, Fighter target)
+        {
+            if (abilityEffectEvent != null)
+            {
+                return abilityEffectEvent;
+            }
+            abilityEffectEvent = new AbilityEffectEvent(this, caster, target, 1, 1, 1, 1, 1, AbilityEffectEvent.EventTargetType.OVERTIME);
+            return abilityEffectEvent;
+        }
+
         public override void Use(Fighter caster, Fighter target)
         {
-            AbilityEffectEvent abilityEffectEvent = new AbilityEffectEvent(this, caster, target, 1, 1, 1, 1, 1, AbilityEffectEvent.EventTargetType.OVERTIME);
-            target.TakeOverTime(abilityEffectEvent);
+            target.TakeOverTime(GetAbilityEffectEvent(caster, target));
+        }
+
+        private bool StaticCheck(AbilityEffectEvent abeeCheck, AbilityEffectEvent abeeReceived)
+        {
+            bool proceed = true;
+
+            if (abeeCheck.AbilityEffect != null)
+            {
+                if (abeeCheck.AbilityEffect.School != abeeReceived.AbilityEffect.School)
+                {
+                    proceed = false;
+                }
+            }
+
+            if (abeeCheck.EventTarget != null && abeeCheck.EventTarget != abeeReceived.EventTarget)
+            {
+                proceed = false;
+            }
+
+            return proceed;
         }
     }
 }

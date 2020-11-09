@@ -20,10 +20,15 @@ namespace Abilities
             fighter.CharacterAttributes.GetAttribute(AttTarget).Value = fighter.CharacterAttributes.GetAttribute(AttTarget).Value - AbilityEffectEvent.RealValue;
         }
 
+        public override AbilityEffectEvent GetAbilityEffectEvent(Fighter caster, Fighter target)
+        {
+            abilityEffectEvent = new AbilityEffectEvent(this, caster, target, 1, 1, Bonus, 1, 1, AbilityEffectEvent.EventTargetType.OVERTIME);
+            return abilityEffectEvent;
+        }
+
         public override void Use(Fighter caster, Fighter target)
         {
-            AbilityEffectEvent effectEvent = new AbilityEffectEvent(this, caster, target, 1, 1, Bonus, 1, 1, AbilityEffectEvent.EventTargetType.OVERTIME);
-            target.TakeOverTime(effectEvent);
+            target.TakeOverTime(GetAbilityEffectEvent(caster, target));
         }
     }
 }

@@ -129,8 +129,10 @@ public class Arena : MonoBehaviour
         foreach (Fighter fighter in fighters)
         {
             fighter.CharacterAttributes.GetAttribute(AttributeBase.Base.BASESTRENGTH).Value = 5;
-            fighter.CharacterAttributes.GetAttribute(AttributeBase.Base.BASEAGILITY).Value = 5;
+            fighter.CharacterAttributes.GetAttribute(AttributeBase.Base.BASEAGILITY).Value = 10;
             fighter.CharacterAttributes.GetAttribute(AttributeBase.Base.BASEINTELLECT).Value = 5;
+            fighter.CharacterAttributes.GetAttribute(AttributeBonus.Bonus.BONUSCRITCHANCE).Value = 100;
+            fighter.CharacterAttributes.GetAttribute(AttributeBase.Base.BASEAP).Value = 100;
             fighter.CharacterAttributes.GetAttribute(AttributeResources.Resources.ACTUALHP).Value = fighter.CharacterAttributes.GetAttribute(AttributeSum.Sum.MAXHP).Value;
             fighter.CharacterAttributes.GetAttribute(AttributeResources.Resources.ACTUALMANA).Value = fighter.CharacterAttributes.GetAttribute(AttributeSum.Sum.MAXMANA).Value;
             fighter.CharacterAttributes.GetAttribute(AttributeResources.Resources.ACTUALAP).Value = fighter.CharacterAttributes.GetAttribute(AttributeSum.Sum.MAXACTIONPOINTS).Value;

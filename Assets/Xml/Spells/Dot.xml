@@ -35,7 +35,7 @@
                 <TargetAtt>ACTUALHP</TargetAtt>
             </Damage>
         </EffectsToUse>
-        <CastMode>0</CastMode>>
+        <CastMode>0</CastMode>
         <RemoAfterTrigger>0</RemoAfterTrigger>
     </ConditionEffect>
 </Ability>

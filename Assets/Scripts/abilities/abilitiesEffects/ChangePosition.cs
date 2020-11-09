@@ -16,23 +16,40 @@ namespace Abilities
         [XmlIgnore]
         public int EnemyPosition { get; set; }
 
-        public override void Use(Fighter caster, Fighter target)
+        public override AbilityEffectEvent GetAbilityEffectEvent(Fighter caster, Fighter target)
         {
-            AbilityEffectEvent abilityEffect = GetAbilityEffectEvent(caster, target);
+            if (abilityEffectEvent != null)
+            {
+                return abilityEffectEvent;
+            }
+
+            AbilityEffectEvent abilityEffect = new AbilityEffectEvent();
+            abilityEffect.AbilityEffect = this;
+            abilityEffect.Caster = caster;
+            abilityEffect.Target = target;
+            abilityEffect.Value = HowFar;
+            abilityEffect.EventTarget = AbilityEffectEvent.EventTargetType.POSITION;
+
             int howFarCanMove = HowFarCanMove(target);
             if (ReverseDirection)
             {
                 abilityEffect.Value = HowFar * (-1);
                 howFarCanMove *= (-1);
             }
-            
+
             if (ReverseDirection && howFarCanMove > abilityEffect.RealValue || !ReverseDirection && howFarCanMove < abilityEffect.RealValue)
             {
                 abilityEffect.Multiplier = 1;
                 abilityEffect.Modificator = 1;
                 abilityEffect.Value = howFarCanMove;
             }
-            target.ChangePosition(abilityEffect);
+            abilityEffectEvent = abilityEffect;
+            return abilityEffectEvent;
+        }
+
+        public override void Use(Fighter caster, Fighter target)
+        {
+            target.ChangePosition(GetAbilityEffectEvent(caster, target));
         }
 
         public new bool IsAbleToUse(Fighter caster, Fighter target)
@@ -63,17 +80,6 @@ namespace Abilities
             } 
             */
             return false;
-        }
-
-        private AbilityEffectEvent GetAbilityEffectEvent(Fighter caster, Fighter target)
-        {
-            AbilityEffectEvent abilityEffectEvent = new AbilityEffectEvent();
-            abilityEffectEvent.AbilityEffect = this;
-            abilityEffectEvent.Caster = caster;
-            abilityEffectEvent.Target = target;
-            abilityEffectEvent.Value = HowFar;
-            abilityEffectEvent.EventTarget = AbilityEffectEvent.EventTargetType.POSITION;
-            return abilityEffectEvent;
         }
 
         private int HowFarCanMove(Fighter target)

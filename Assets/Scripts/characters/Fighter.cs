@@ -118,7 +118,7 @@ namespace characters
         /// <param name="ability">Ability to use.</param>
         /// <param name="target">Target for ability.</param>
         public void UseAbility(Ability ability, Fighter target, bool consumeResources)
-        {      
+        {
             ability.Use(this, target, consumeResources);
         }
 

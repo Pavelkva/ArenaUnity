@@ -1,6 +1,7 @@
 ﻿using characters;
 using System;
 using System.Dynamic;
+using System.Security.Permissions;
 
 namespace Abilities
 {
@@ -17,8 +18,12 @@ namespace Abilities
         public AttributeResources.Resources TargetAtt { get; set; }
         public float RealValue { get; set; }
 
-        public override void Use(Fighter caster, Fighter target)
+        public override AbilityEffectEvent GetAbilityEffectEvent(Fighter caster, Fighter target)
         {
+            if (abilityEffectEvent != null)
+            {
+                return abilityEffectEvent;
+            }
             ICharacterAttributes statsToCalc = caster.CharacterAttributes;
             if (CalcFromTarget)
             {
@@ -27,6 +32,7 @@ namespace Abilities
 
             // create new event and set default hit and modificator
             AbilityEffectEvent effectEvent = new AbilityEffectEvent(this, caster, target, 1, 1, 1, 1, 1, AbilityEffectEvent.EventTargetType.DAMAGE);
+            effectEvent.AttTarget = (AttributeAbstract.Type)TargetAtt;
 
             float effect = MaxEffect;
             if (MinEffect != MaxEffect)
@@ -68,9 +74,15 @@ namespace Abilities
                     effectEvent.Hit = 0f;
                 }
             }
-            target.TakeDamage(effectEvent);
-
+            abilityEffectEvent = effectEvent;
+            return abilityEffectEvent;
         }
+
+        public override void Use(Fighter caster, Fighter target)
+        {
+            target.TakeDamage(GetAbilityEffectEvent(caster, target));
+        }
+
     }
 
 }

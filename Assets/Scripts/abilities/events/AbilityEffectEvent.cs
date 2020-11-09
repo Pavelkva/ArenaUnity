@@ -17,6 +17,11 @@ namespace Abilities
             POSITION,
         }
 
+        [XmlElement("Damage", Type = typeof(Damage))]
+        [XmlElement("Buff", Type = typeof(Buff))]
+        [XmlElement("ConditionEffect", Type = typeof(ConditionEffect))]
+        [XmlElement("Heal", Type = typeof(Heal))]
+        [XmlElement("ChangePosition", Type = typeof(ChangePosition))]
         public AbilityEffect AbilityEffect { get; set; }
         [XmlIgnore]
         public Fighter Caster { get; set; }

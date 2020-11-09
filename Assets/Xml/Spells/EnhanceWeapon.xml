@@ -1,0 +1,56 @@
+<Ability>
+    <Id>11</Id>
+    <Name>Consecrate Weapon</Name>
+    <RangeToUse>0</RangeToUse>
+    <SelfCast>true</SelfCast>
+    <AbilityCost>
+        <TargetAtt>ACTUALMANA</TargetAtt>
+        <Percentage>false</Percentage>
+        <Value>1</Value>
+    </AbilityCost>
+    <ConditionEffect>
+        <Id>21</Id>
+        <AbleToMiss>false</AbleToMiss>
+        <School>MAGICAL</School>
+        <RangeToUse>1</RangeToUse>
+        <SelfCast>true</SelfCast>
+
+        <Name>Weapon consecrate</Name>
+        <Duration>5</Duration>
+        <Stackable>1</Stackable>
+
+        <Event>ABILITYAFTERUSE</Event>
+        <LowerCheck>
+            <AbilityEffectEvent>
+                <Damage>
+                    <School>PHYSICAL</School>
+                </Damage>
+                <EventTarget>DAMAGE</EventTarget>
+                <Hit>1</Hit>
+            </AbilityEffectEvent>
+        </LowerCheck>
+
+        <EffectsToUse>
+            <Damage>
+                <Id>12</Id>
+                <AbleToMiss>false</AbleToMiss>
+                <School>MAGICAL</School>
+                <RangeToUse>1</RangeToUse>
+
+                <MinEffect>1</MinEffect>
+                <MaxEffect>5</MaxEffect>
+                <Multiplier>0</Multiplier>
+                <MultiplierAtt>SPELLPOWER</MultiplierAtt>
+                <BonusMultiplier>0.1</BonusMultiplier>
+                <BonusAtt>SPELLPOWER</BonusAtt>
+                <CalcFromTarget>false</CalcFromTarget>
+                <AbleToCrit>true</AbleToCrit>
+                <TargetAtt>ACTUALHP</TargetAtt>
+            </Damage>
+        </EffectsToUse>
+        <RemoveAfterTrigger>0</RemoveAfterTrigger>
+
+    </ConditionEffect>
+
+
+</Ability>

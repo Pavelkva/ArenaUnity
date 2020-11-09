@@ -2,6 +2,7 @@
 using JetBrains.Annotations;
 using System;
 using System.Data;
+using UnityEditor.Compilation;
 using UnityEngine;
 
 namespace Abilities
@@ -15,6 +16,8 @@ namespace Abilities
         public int RangeToUse { get; set; }
         public bool SelfCast { get; set; }
         public abstract void Use(Fighter caster, Fighter target);
+        protected AbilityEffectEvent abilityEffectEvent;
+        public abstract AbilityEffectEvent GetAbilityEffectEvent(Fighter caster, Fighter target);
         public bool IsAbleToUse(Fighter caster, Fighter target)
         {
             if (SelfCast)
@@ -29,6 +32,11 @@ namespace Abilities
             {
                 return caster.Position - target.Position <= RangeToUse;
             }
+        }
+
+        public void ClearAbilityEffectEvent()
+        {
+            abilityEffectEvent = null;
         }
     }
 }

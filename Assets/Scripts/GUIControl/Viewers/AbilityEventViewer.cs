@@ -2,7 +2,9 @@
 using characters;
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEditor;
@@ -14,11 +16,18 @@ public class AbilityEventViewer : MonoBehaviour
     private Fighter fighter;
     private List<int> ignore;
 
+    private Stopwatch stopWatch;
+    private float xLeft;
+    private float xRight;
+    private float counter;
+
+
     public void Start()
     {
         fighter = GetComponent<Fighter>();
         fighter.EffectTaked += ShowText;
         ignore = new List<int> { 6, 5 };
+        stopWatch = Stopwatch.StartNew();
     }
 
     // Update is called once per frame
@@ -30,6 +39,29 @@ public class AbilityEventViewer : MonoBehaviour
 
             GameObject textobjectInsta = Instantiate(Resources.Load("Prefabs/TextObject") as GameObject);
             textobjectInsta.transform.position = new Vector3(transform.position.x, transform.position.y + 7, transform.position.z);
+
+            if (stopWatch.ElapsedMilliseconds < 750)
+            {
+                counter++;
+                float x;
+                if (counter%2 == 0 && counter < 4)
+                {
+                    xLeft -= 1f;
+                    x = xLeft;
+                } else
+                {
+                    xRight += 1f;
+                    x = xRight;
+                }
+                textobjectInsta.transform.position = new Vector3(transform.position.x + x, transform.position.y + 7, transform.position.z);
+            } else
+            {
+                counter = 0;
+                xLeft = 0;
+                xRight = 0;
+                stopWatch.Restart();
+            }
+
 
             TextMeshPro textMesh = textobjectInsta.GetComponent<TextMeshPro>();
             textMesh.color = GetTextColor(abee);
@@ -67,7 +99,16 @@ public class AbilityEventViewer : MonoBehaviour
         switch (abee.EventTarget)
         {
             case AbilityEffectEvent.EventTargetType.DAMAGE:
-                return new Color(0.74f, 0.01f, 0.01f);
+                if (abee.AbilityEffect.School == EffectType.School.PHYSICAL)
+                {
+                    return new Color(0.74f, 0.01f, 0.01f);
+                }
+                else
+                {
+                    return new Color(0.52f, 0, 0.52f);
+                }
+
+
             case AbilityEffectEvent.EventTargetType.HEAL:
                 return new Color(0.01f, 0.74f, 0.01f);
             default:
@@ -87,4 +128,5 @@ public class AbilityEventViewer : MonoBehaviour
         }
         return abee.RealValue.ToString();
     }
+
 }

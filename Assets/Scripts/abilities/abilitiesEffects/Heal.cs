@@ -4,8 +4,13 @@ namespace Abilities
 {
     public class Heal : Damage
     {
-        public override void Use(Fighter caster, Fighter target)
+        public override AbilityEffectEvent GetAbilityEffectEvent(Fighter caster, Fighter target)
         {
+            if (abilityEffectEvent != null)
+            {
+                return abilityEffectEvent;
+            }
+
             ICharacterAttributes statsToCalc = caster.CharacterAttributes;
             if (CalcFromTarget)
             {
@@ -56,8 +61,12 @@ namespace Abilities
                     effectEvent.Hit = 0f;
                 }
             }
-            target.TakeHeal(effectEvent);
-
+            abilityEffectEvent = effectEvent;
+            return abilityEffectEvent;
+        }
+        public override void Use(Fighter caster, Fighter target)
+        {
+            target.TakeHeal(GetAbilityEffectEvent(caster, target));
         }
     }
 }
